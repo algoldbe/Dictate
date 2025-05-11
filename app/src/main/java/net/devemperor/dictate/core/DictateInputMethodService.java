@@ -854,6 +854,7 @@ public class DictateInputMethodService extends InputMethodService {
             try {
                 OpenAIOkHttpClient.Builder clientBuilder = OpenAIOkHttpClient.builder()
                         .apiKey(sp.getString("net.devemperor.dictate.api_key", "NO_API_KEY").replaceAll("[^ -~]", ""))
+                        .baseUrl("https://api.groq.com/openai/v1/")
                         .timeout(Duration.ofSeconds(120));
 
                 String proxyHost = sp.getString("net.devemperor.dictate.proxy_host", getString(R.string.dictate_settings_proxy_hint));
