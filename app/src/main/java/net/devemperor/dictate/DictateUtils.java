@@ -19,6 +19,9 @@ public class DictateUtils {
                 return audioTime * 0.0001f;
             case "gpt-4o-mini-transcribe":
                 return audioTime * 0.00005f;
+            case "whisper-large-v3-turbo":
+            case "whisper-large-v3":
+                return audioTime * 0.0001f;  // Assuming same cost as whisper-1
 
             case "o3-mini":  // o3-mini and o1-mini cost the same
             case "o1-mini":
@@ -64,6 +67,12 @@ public class DictateUtils {
                 return "GPT-4";
             case "gpt-3.5-turbo":
                 return "GPT-3.5 Turbo";
+            case "whisper-large-v3-turbo":
+                return "Whisper Large V3 Turbo";
+            case "whisper-large-v3":
+                return "Whisper Large V3";
+            case "llama-3.3-70b-versatile":
+                return "Llama 3.3 70B Versatile";
             default:
                 return "Unknown";
         }
