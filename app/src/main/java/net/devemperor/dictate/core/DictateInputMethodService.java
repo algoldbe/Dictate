@@ -760,7 +760,7 @@ public class DictateInputMethodService extends InputMethodService {
             try {
                 OpenAIOkHttpClient.Builder clientBuilder = OpenAIOkHttpClient.builder()
                         .apiKey(apiKey)
-                        .baseUrl(sp.getBoolean("net.devemperor.dictate.custom_api_host_enabled", false) ? customApiHost : "https://api.openai.com/v1/")
+                        .baseUrl(sp.getBoolean("net.devemperor.dictate.custom_api_host_enabled", false) ? customApiHost : "https://api.groq.com/openai/v1/")
                         .timeout(Duration.ofSeconds(120));
 
                 TranscriptionCreateParams.Builder transcriptionBuilder = TranscriptionCreateParams.builder()
