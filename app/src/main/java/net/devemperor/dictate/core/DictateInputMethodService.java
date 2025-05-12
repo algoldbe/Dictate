@@ -929,6 +929,7 @@ public class DictateInputMethodService extends InputMethodService {
 
     private void sendLogToCrashlytics(Exception e) {
         // get all values from SharedPreferences and add them as custom keys to crashlytics
+    /*
         FirebaseCrashlytics crashlytics = FirebaseCrashlytics.getInstance();
         for (String key : sp.getAll().keySet()) {
             Object value = sp.getAll().get(key);
@@ -946,10 +947,13 @@ public class DictateInputMethodService extends InputMethodService {
         }
         crashlytics.setUserId(sp.getString("net.devemperor.dictate.user_id", "null"));
         crashlytics.recordException(e);
+        */
+
+        
         StringWriter sw = new StringWriter();
         e.printStackTrace(new PrintWriter(sw));
         Log.e("DictateInputMethodService", sw.toString());
-        Log.e("DictateInputMethodService", "Recorded crashlytics report");
+        Log.e("DictateInputMethodService", "Error occurred but Crashlytics is disabled");
     }
 
     private void showInfo(String type) {
