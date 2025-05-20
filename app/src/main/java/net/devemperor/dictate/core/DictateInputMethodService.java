@@ -790,7 +790,7 @@ public class DictateInputMethodService extends InputMethodService {
                 }
 
                 Transcription transcription = clientBuilder.build().audio().transcriptions().create(transcriptionBuilder.build()).asTranscription();
-                String resultText = transcription.text();
+                String resultText = transcription.text().trim();
 
                 usageDb.edit(transcriptionModel, DictateUtils.getAudioDuration(audioFile), 0, 0);
 
