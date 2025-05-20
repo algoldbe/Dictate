@@ -767,6 +767,7 @@ public class DictateInputMethodService extends InputMethodService {
                         .file(audioFile.toPath())
                         .model(transcriptionModel)
                         .responseFormat(AudioResponseFormat.JSON);  // gpt-4o-transcribe only supports json
+                        .translate(false); // Add this line to prevent translation
 
                 if (!currentInputLanguageValue.equals("detect")) transcriptionBuilder.language(currentInputLanguageValue);
                 if (!stylePrompt.isEmpty()) transcriptionBuilder.prompt(stylePrompt);
