@@ -767,10 +767,24 @@ public class DictateInputMethodService extends InputMethodService {
                         .file(audioFile.toPath())
                         .model(transcriptionModel)
                         .responseFormat(AudioResponseFormat.JSON);  // gpt-4o-transcribe only supports json
-                        .translate(false); // Add this line to prevent translation
-
-                if (!currentInputLanguageValue.equals("detect")) transcriptionBuilder.language(currentInputLanguageValue);
-                if (!stylePrompt.isEmpty()) transcriptionBuilder.prompt(stylePrompt);
+                
+                if (!currentInputLanguageValue.equals("detect")) {
+                    transcriptionBuilder.language(currentInputLanguageValue);
+                    
+                    // Add specific instructions to keep the original language
+                    String languagePrompt = "Transcribe in " + currentInputLanguageValue + 
+                                            " only. Do not translate to any other language.";
+                    
+                    if (!stylePrompt.isEmpty()) {
+                        // Combine with existing style prompt
+                        transcriptionBuilder.prompt(stylePrompt + " " + languagePrompt);
+                    } else {
+                        transcriptionBuilder.prompt(languagePrompt);
+                    }
+                } else if (!stylePrompt.isEmpty()) {
+                    transcriptionBuilder.prompt(stylePrompt);
+                }
+                
                 if (sp.getBoolean("net.devemperor.dictate.proxy_enabled", false)) {
                     clientBuilder.proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyHost.split(":")[0], Integer.parseInt(proxyHost.split(":")[1]))));
                 }
